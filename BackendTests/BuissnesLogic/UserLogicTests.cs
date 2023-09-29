@@ -45,4 +45,14 @@ public class UserLogicTests
     Assert.AreEqual(returnedUser.Username, username);
   }
 
+  [TestMethod]
+  [ExpectedException(typeof(ArgumentException))]
+  public void GetUserByUsernameThatDosntExists()
+  {
+    string username = "notFound";
+
+    UserLogic userLogic = new UserLogic();
+    userLogic.GetUserByUsername(username);
+  }
+
 }

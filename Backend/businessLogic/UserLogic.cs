@@ -25,7 +25,15 @@ public class UserLogic
 
   public User GetUserByUsername(string username)
   {
-    return this.Users.First(u => u.Username == username);
+    try
+    {
+      return this.Users.First(u => u.Username == username);
+    }
+    catch
+    {
+      throw new ArgumentException("Username not found");
+    }
+
   }
 
 
