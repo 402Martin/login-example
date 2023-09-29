@@ -4,23 +4,36 @@ using Backend.Entities;
 
 public class UserLogic
 {
-  public List<User> Users { get; private set; }
+  private List<User> Users { get; set; }
 
   public UserLogic()
   {
-    Users = new List<User>();
+    this.Users = new List<User>();
   }
 
   public User CreateUser(string username, string password)
   {
-    if (Users.Any(u => u.Username == username))
+    if (this.Users.Any(u => u.Username == username))
     {
       throw new ArgumentException("Username already exists");
     }
     User newUser = new User(username, password);
-    Users.Add(new User(username, password));
+    this.Users.Add(new User(username, password));
 
     return newUser;
+  }
+
+  public User GetUserByUsername(string username)
+  {
+    try
+    {
+      return this.Users.First(u => u.Username == username);
+    }
+    catch
+    {
+      throw new ArgumentException("Username not found");
+    }
+
   }
 
 
