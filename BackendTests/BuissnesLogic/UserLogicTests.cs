@@ -68,5 +68,18 @@ public class UserLogicTests
     Assert.AreEqual(returnedUser.Username, username);
   }
 
+  [TestMethod]
+  [ExpectedException(typeof(ArgumentException))]
+  public void LoginWithWrongPassword()
+  {
+    string username = "test";
+    string password = "test";
+    string wrongPassword = "wrongPassword";
+
+    UserLogic userLogic = new UserLogic();
+    userLogic.CreateUser(username, password);
+    userLogic.Login(username, wrongPassword);
+  }
+
 
 }
