@@ -1,0 +1,81 @@
+@page "/Register"
+
+@using FrontEnd.Data
+
+@inject UserController userController
+
+<PageTitle>Login</PageTitle>
+
+<h1>Register</h1>
+
+<form>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" @bind="User!.Username" />
+    </div>
+    <div class="form-group">
+        <label for="confirmPassword">Password</label>
+        <input type="confirmPassword" class="form-control" id="confirmPassword" @bind="User!.ConfirmPassword" />
+    </div>
+    <div class="form-group">
+        <label for="password">Confirm Password</label>
+        <input type="password" class="form-control" id="password" @bind="User!.Password" />
+    </div>
+    <div class="form-error" style="color:red">
+        @errorMessage
+    </div>
+    <br/>
+    <button type="button" class="btn btn-primary" @onclick="Submit">Submit</button>
+    <a href="/login">Login</a>
+</form>
+
+
+@code {
+    
+    public RegisterIn? User { get; set; }
+    public string errorMessage { get; set; } = "";
+
+    protected override void OnInitialized() => User ??= new();
+
+    private void Submit()
+    {
+        if(string.IsNullOrWhiteSpace(User.Username)|| string.IsNullOrWhiteSpace(User.Password)
+                || string.IsNullOrWhiteSpace(User.ConfirmPassword))
+        {
+            errorMessage = "Please fill in all fields";
+            return;
+        }
+
+        if(User.Password != User.ConfirmPassword)
+        {
+            errorMessage = "Passwords do not match";
+            return;
+        }
+
+
+        try {
+            userController.CreateUser(User.Username, User.Password);
+        
+        }catch (Exception e)
+        {
+            errorMessage = e.Message;
+            return;
+        }
+    }
+
+    public class RegisterIn
+    {
+        public string? Username { get; set; }
+        public string? Password { get; set; }
+        public string? ConfirmPassword { get; set; }
+
+        public RegisterIn()
+        {
+            Username = "";
+            Password = "";
+            ConfirmPassword = "";
+        }
+
+    }
+
+}

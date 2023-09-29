@@ -14,6 +14,10 @@ public class UserController
 
     public void CreateUser(string username, string password)
     {
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            throw new ArgumentException("Username or password is empty");
+        }
         this.UserLogic.CreateUser(username, password);
     }
 
