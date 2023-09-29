@@ -1,5 +1,9 @@
-@using Backend.Dto
 @page "/Login"
+
+@using Backend.Dto
+@using FrontEnd.Data
+
+@inject UserController userController
 
 <PageTitle>Login</PageTitle>
 
@@ -14,7 +18,7 @@
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" @bind="User!.Password" />
     </div>
-    <div class="form-error">
+    <div class="form-error" style="color:red">
         @errorMessage
     </div>
     <br/>
@@ -35,6 +39,15 @@
         if(string.IsNullOrWhiteSpace(User.Username)|| string.IsNullOrWhiteSpace(User.Password))
         {
             errorMessage = "Please fill in all fields";
+            return;
+        }
+
+        try {
+
+        userController.Login(User);
+        }catch (Exception e)
+        {
+            errorMessage = e.Message;
             return;
         }
     }
