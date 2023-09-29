@@ -11,7 +11,7 @@ public class UserLogic
     Users = new List<User>();
   }
 
-  public void CreateUser(string username, string password)
+  public User CreateUser(string username, string password)
   {
     if (Users.Any(u => u.Username == username))
     {
@@ -19,8 +19,9 @@ public class UserLogic
     }
     User newUser = new User(username, password);
     Users.Add(new User(username, password));
-  }
 
+    return newUser;
+  }
 
 
 
