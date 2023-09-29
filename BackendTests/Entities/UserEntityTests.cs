@@ -28,4 +28,16 @@ public class UserEntityTests
 
     Assert.AreNotEqual(Guid.Empty, user.Id);
   }
+
+  [TestMethod]
+  public void autoAssignUniqueId()
+  {
+    var username = "user";
+    var password = "password";
+
+    User userOne = new User(username, password);
+    User userTwo = new User(username, password);
+    Assert.AreNotEqual(userOne.Id, userTwo.Id);
+
+  }
 }

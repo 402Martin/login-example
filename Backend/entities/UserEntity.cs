@@ -8,7 +8,7 @@ public class User
 
   public User(string username, string password)
   {
-    Id = "";
+    Id = Guid.NewGuid().ToString();
     Username = username;
     Password = password;
   }
