@@ -36,6 +36,16 @@ public class UserLogic
 
   }
 
+  public User Login(string username, string password)
+  {
+    User user = this.GetUserByUsername(username);
+    if (user.Password != password)
+    {
+      throw new ArgumentException("Password is incorrect");
+    }
+    return user;
+  }
+
 
 
 }

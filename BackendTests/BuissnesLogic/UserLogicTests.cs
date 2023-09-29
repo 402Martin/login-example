@@ -55,4 +55,18 @@ public class UserLogicTests
     userLogic.GetUserByUsername(username);
   }
 
+  [TestMethod]
+  public void Login()
+  {
+    string username = "test";
+    string password = "test";
+
+    UserLogic userLogic = new UserLogic();
+    userLogic.CreateUser(username, password);
+    User returnedUser = userLogic.Login(username, password);
+
+    Assert.AreEqual(returnedUser.Username, username);
+  }
+
+
 }
