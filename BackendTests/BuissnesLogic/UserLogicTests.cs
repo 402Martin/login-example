@@ -1,4 +1,5 @@
 using Backend.BuisnessLogic;
+using Backend.Dto;
 using Backend.Entities;
 
 namespace BackendTests;
@@ -54,5 +55,32 @@ public class UserLogicTests
     UserLogic userLogic = new UserLogic();
     userLogic.GetUserByUsername(username);
   }
+
+  [TestMethod]
+  public void Login()
+  {
+    string username = "test";
+    string password = "test";
+
+    UserLogic userLogic = new UserLogic();
+    userLogic.CreateUser(username, password);
+    Credentials returnedUser = userLogic.Login(username, password);
+
+    Assert.AreEqual(returnedUser.Username, username);
+  }
+
+  [TestMethod]
+  [ExpectedException(typeof(ArgumentException))]
+  public void LoginWithWrongPassword()
+  {
+    string username = "test";
+    string password = "test";
+    string wrongPassword = "wrongPassword";
+
+    UserLogic userLogic = new UserLogic();
+    userLogic.CreateUser(username, password);
+    userLogic.Login(username, wrongPassword);
+  }
+
 
 }
