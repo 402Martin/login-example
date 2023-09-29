@@ -27,4 +27,18 @@ public class UserLogicTests
     Assert.AreEqual(1, userLogic.Users.Count);
 
   }
+
+  [TestMethod]
+  [ExpectedException(typeof(ArgumentException))]
+  public void CreateUserDontAllowReaptedUsername()
+  {
+    string username = "test";
+    string password = "test";
+
+    UserLogic userLogic = new UserLogic();
+    userLogic.CreateUser(username, password);
+    userLogic.CreateUser(username, password);
+
+
+  }
 }
