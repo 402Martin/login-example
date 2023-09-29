@@ -1,5 +1,6 @@
 namespace Backend.BuisnessLogic;
 
+using Backend.Dto;
 using Backend.Entities;
 
 public class UserLogic
@@ -36,14 +37,14 @@ public class UserLogic
 
   }
 
-  public User Login(string username, string password)
+  public Credentials Login(string username, string password)
   {
     User user = this.GetUserByUsername(username);
     if (user.Password != password)
     {
       throw new ArgumentException("Password is incorrect");
     }
-    return user;
+    return new Credentials(user.Username, user.Id);
   }
 
 

@@ -1,4 +1,5 @@
 using Backend.BuisnessLogic;
+using Backend.Dto;
 using Backend.Entities;
 
 namespace BackendTests;
@@ -63,7 +64,7 @@ public class UserLogicTests
 
     UserLogic userLogic = new UserLogic();
     userLogic.CreateUser(username, password);
-    User returnedUser = userLogic.Login(username, password);
+    Credentials returnedUser = userLogic.Login(username, password);
 
     Assert.AreEqual(returnedUser.Username, username);
   }
