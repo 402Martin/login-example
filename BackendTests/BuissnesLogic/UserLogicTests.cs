@@ -44,19 +44,13 @@ public class UserLogicTests
   [TestMethod]
   public void CreateUserReturnUser()
   {
+    string username = "test";
+    string password = "test";
 
-    {
-      string username = "test";
-      string password = "test";
+    UserLogic userLogic = new UserLogic();
+    User returnedUser = userLogic.CreateUser(username, password);
 
-      UserLogic userLogic = new UserLogic();
-      User returnedUser = userLogic.CreateUser(username, password);
-
-      Assert.AreEqual(returnedUser.Username, username);
-
-    }
-
-
+    Assert.AreEqual(returnedUser.Username, username);
   }
 
 }
