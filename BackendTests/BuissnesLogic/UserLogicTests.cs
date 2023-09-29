@@ -1,4 +1,5 @@
 using Backend.BuisnessLogic;
+using Backend.Entities;
 
 namespace BackendTests;
 
@@ -12,5 +13,18 @@ public class UserLogicTests
     var userLogic = new UserLogic();
 
     Assert.IsNotNull(userLogic.Users);
+  }
+
+  [TestMethod]
+  public void CreateUser()
+  {
+    string username = "test";
+    string password = "test";
+
+    UserLogic userLogic = new UserLogic();
+    userLogic.CreateUser(username, password);
+
+    Assert.AreEqual(1, userLogic.Users.Count);
+
   }
 }
